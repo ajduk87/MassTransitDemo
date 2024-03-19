@@ -1,0 +1,6 @@
+@MassTransitDemo_HostAddress = http://localhost:5088
+
+GET {{MassTransitDemo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

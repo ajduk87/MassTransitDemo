@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/MassTransitDemo/bin/Debug/net8.0
+/MassTransitDemo/obj
+/Sample.Components/bin/Debug/net8.0
+/Sample.Components/obj
+/Sample.Contracts/bin/Debug/net8.0
+/Sample.Contracts/obj
