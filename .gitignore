@@ -13,3 +13,5 @@
 /Sample.Contracts/bin/Release/net8.0
 /Sample.Service/bin
 /Sample.Service/obj
+/Rabbit.Details/bin/Debug/net8.0
+/Rabbit.Details/obj

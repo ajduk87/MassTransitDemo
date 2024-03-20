@@ -25,7 +25,7 @@ public class Program
 
                 services.AddMassTransit(cfg => 
                 {
-                    cfg.AddConsumersFromNamespaceContaining<SubmitOrderConsumer>();
+                   // cfg.AddConsumersFromNamespaceContaining<SubmitOrderConsumer>();
 
                     Console.WriteLine("SubmitOrderConsumer is added.");
 

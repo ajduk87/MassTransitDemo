@@ -12,5 +12,6 @@ namespace Sample.Contracts
         DateTime Timestamp { get; }
 
         string CustomerNumber  { get; }
+        public double MoneyInDollars { get; set; }
     }
 }

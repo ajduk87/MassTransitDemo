@@ -50,7 +50,7 @@ namespace MassTransitDemo.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(Guid id, string customerNumber)
         {
-            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("exchange:submit-order"));
+            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("exchange:order-service"));
 
             await endpoint.Send<SubmitOrder>(new
             {

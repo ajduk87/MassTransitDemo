@@ -13,6 +13,7 @@ namespace Sample.Components.Consumers
     {
         public async Task Consume(ConsumeContext<SubmitOrder> context)
         {
+            Console.WriteLine($"Submit order command is received {context.Message.CustomerNumber} and price is {context.Message.MoneyInDollars} dollars.");
 
             if (context.Message.CustomerNumber.Contains("TEST"))
             {

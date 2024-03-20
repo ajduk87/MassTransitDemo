@@ -34,6 +34,7 @@ builder.Services.AddMassTransit(cfg =>
         });
 
         // Add additional configuration here as needed
+       
     });
 });
 
