@@ -1,4 +1,5 @@
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Sample.Components.Consumers;
 using Sample.Contracts;
 using System.Runtime.CompilerServices;
@@ -11,18 +12,32 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.TryAddSingleton(KebabCaseEndpointNameFormatter.Instance);
 builder.Services.AddMassTransit(cfg =>
 {
-    cfg.AddConsumer<SubmitOrderConsumer>();
+    //cfg.AddConsumer<SubmitOrderConsumer>();
 
-    cfg.UsingInMemory((context, busConfigurator) =>
+    //cfg.UsingInMemory((context, busConfigurator) =>
+    //{
+    //    busConfigurator.ReceiveEndpoint("submit-order", ep =>
+    //    {
+    //        ep.ConfigureConsumer<SubmitOrderConsumer>(context);
+    //    });
+    //});
+
+    cfg.UsingRabbitMq((context, busConfigurator) =>
     {
-        busConfigurator.ReceiveEndpoint("submit-order", ep =>
+        busConfigurator.Host(new Uri("rabbitmq://localhost/"), h =>
         {
-            ep.ConfigureConsumer<SubmitOrderConsumer>(context);
+            h.Username("guest");
+            h.Password("guest");
         });
+
+        // Add additional configuration here as needed
     });
 });
+
+//builder.Services.AddMassTransitHostedService();
 
 var app = builder.Build();
 

@@ -9,3 +9,7 @@
 /Sample.Components/obj
 /Sample.Contracts/bin/Debug/net8.0
 /Sample.Contracts/obj
+/Sample.Components/bin/Release/net8.0
+/Sample.Contracts/bin/Release/net8.0
+/Sample.Service/bin
+/Sample.Service/obj

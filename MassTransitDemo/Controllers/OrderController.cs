@@ -11,11 +11,15 @@ namespace MassTransitDemo.Controllers
     {
         private ILogger<OrderController> _logger;
         private IRequestClient<SubmitOrder> _submitOrderRequestClient;
+        private ISendEndpointProvider _sendEndpointProvider;
 
-        public OrderController(ILogger<OrderController> logger, IRequestClient<SubmitOrder> submitOrderRequestClient)
+        public OrderController(ILogger<OrderController> logger, 
+                               IRequestClient<SubmitOrder> submitOrderRequestClient,
+                               ISendEndpointProvider sendEndpointProvider)
         {
             _logger = logger;
             _submitOrderRequestClient = submitOrderRequestClient;
+            _sendEndpointProvider = sendEndpointProvider;
         }
 
         [HttpPost]
@@ -40,6 +44,22 @@ namespace MassTransitDemo.Controllers
 
                 return BadRequest(response);
             }
+
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(Guid id, string customerNumber)
+        {
+            var endpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri("exchange:submit-order"));
+
+            await endpoint.Send<SubmitOrder>(new
+            {
+                OrderId = id,
+                Timestamp = DateTime.UtcNow,
+                CustomerNumber = customerNumber
+            });
+
+            return Accepted();
 
         }
     }
